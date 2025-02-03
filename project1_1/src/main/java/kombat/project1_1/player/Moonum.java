@@ -1,6 +1,7 @@
 package kombat.project1_1.player;
 
 import kombat.project1_1.model.Minion;
+import kombat.project1_1.service.GameService;
 
 public class Moonum extends Minion {
     public Moonum() {

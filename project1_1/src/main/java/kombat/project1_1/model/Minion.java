@@ -1,5 +1,7 @@
 package kombat.project1_1.model;
-import kombat.project1_1.player.MinionStrategy;
+import kombat.project1_1.player.*;
+
+import kombat.project1_1.service.GameService;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,10 +21,15 @@ public abstract class Minion {
     protected int defenseCost;
     protected int defenseProtection;
     protected MinionStrategy strategy;
+    @Getter
     @Setter
     protected Player owner;
+    private GameService gameService;
+    public GameService getGameService() { // getter method
+        return gameService;
+    }
 
-    public Minion(String name, int cost, int attackPower, int defensePower, int maxHealth, int attackCost, int defenseCost, int defenseProtection, MinionStrategy strategy) {
+    public Minion(String name, int cost, int attackPower, int defensePower, int maxHealth, int attackCost, int defenseCost, int defenseProtection, GameService gameService, MinionStrategy strategy) {
         this.name = name;
         this.cost = cost;
         this.attackPower = attackPower;
@@ -35,7 +42,12 @@ public abstract class Minion {
         this.strategy = strategy;
         this.owner = null; // กำหนดค่าเริ่มต้น
 
+        this.gameService = this.gameService;
+        this.strategy = new PandyMinionStrategy(this.gameService);// ส่ง gameService ไปยัง strategy
+        this.strategy = new CheesebearMinionStrategy(this.gameService);
+        this.strategy = new MoonumMinionStrategy(this.gameService);
     }
+
 
     // โจมตีเป้าหมาย
     public void attack(Minion target, Player owner) {
@@ -47,12 +59,14 @@ public abstract class Minion {
 
     // รับความเสียหายพร้อมป้องกันตัวเองถ้ามีเงินเพียงพอ
     public void receiveDamage(int damage) {
-        if (owner.getCurrentMoney() >= defenseCost) {
+        if (owner != null && owner.getCurrentMoney() >= defenseCost) {
             owner.setCurrentMoney(owner.getCurrentMoney() - defenseCost);
             damage = Math.max(0, damage - defenseProtection);
         }
         this.currentHealth -= damage;
+        if (this.currentHealth < 0) this.currentHealth = 0; // ป้องกัน HP ติดลบ
     }
+
 
     // ตรวจสอบว่ายังมีชีวิตอยู่หรือไม่
     public boolean isAlive() {
@@ -86,5 +100,17 @@ public abstract class Minion {
 
     public int getDefenseProtection() {
         return defenseProtection;
+    }
+
+    public int getCostToMove() {
+        if (this instanceof Pandy) {
+            return 300;
+        } else if (this instanceof Cheesebear) {
+            return 200;
+        } else if (this instanceof Moonum) {
+            return 100;
+        } else {
+            return 0; // หรือค่าเริ่มต้นอื่นๆ
+        }
     }
 }

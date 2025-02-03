@@ -1,5 +1,6 @@
 package kombat.project1_1.model;
 
+import kombat.project1_1.config.Config;
 import lombok.Setter;
 
 import java.util.ArrayList;
@@ -12,36 +13,32 @@ public class Player {
     private List<Hex> ownedHexes;
     private List<Minion> minions;
 
-    private static final int INITIAL_MONEY = 100_000;
-    private static final int TURN_INCOME = 900;
-    private static final double INTEREST_RATE = 0.05;
-
     public Player(String name) {
         this.name = name;
-        this.currentMoney = INITIAL_MONEY;
+        this.currentMoney = Config.INIT_BUDGET; // ใช้เงินเริ่มต้นจาก Config
         this.ownedHexes = new ArrayList<>();
         this.minions = new ArrayList<>();
     }
 
     // รับรายได้ประจำเทิร์น
     public void earnTurnIncome() {
-        currentMoney += TURN_INCOME;
+        currentMoney += Config.TURN_BUDGET; // ใช้รายได้ต่อเทิร์นจาก Config
     }
 
     // รับดอกเบี้ยจากเงินที่เหลือ
-    public void earnInterest(double interestPct) {
-        currentMoney += (int) (currentMoney * INTEREST_RATE);
+    public void earnInterest() {
+        currentMoney += (int) (currentMoney * Config.INTEREST_PCT); // ใช้อัตราดอกเบี้ยจาก Config
     }
 
     // เพิ่มเงิน
     public void addMoney(int amount) {
-        currentMoney += amount;
+        currentMoney = Math.min(currentMoney + amount, Config.MAX_BUDGET); // ตรวจสอบไม่เกินงบสูงสุด
     }
 
     // ซื้อ Hex
-    public boolean buyHex(Hex hex, int hexCost) {
-        if (hex.getOwner() == null && currentMoney >= hexCost && isAdjacentToOwnedHex(hex)) {
-            currentMoney -= hexCost;
+    public boolean buyHex(Hex hex) {
+        if (hex.getOwner() == null && currentMoney >= Config.HEX_PURCHASE_COST && isAdjacentToOwnedHex(hex)) {
+            currentMoney -= Config.HEX_PURCHASE_COST;
             hex.setOwner(this);
             ownedHexes.add(hex);
             return true;
@@ -64,7 +61,7 @@ public class Player {
     public boolean attack(Minion attacker, Minion target) {
         if (currentMoney >= attacker.getAttackCost() && attacker.isAlive() && target.isAlive()) {
             currentMoney -= attacker.getAttackCost();
-            target.receiveDamage(attacker.getAttack());
+            target.receiveDamage(attacker.getAttackPower());
             if (!target.isAlive()) {
                 minions.remove(target);
             }
@@ -74,7 +71,7 @@ public class Player {
     }
 
     // ตรวจสอบว่า Hex ติดกับ Hex ของตัวเองหรือไม่
-    private boolean isAdjacentToOwnedHex(Hex hex) {
+    public boolean isAdjacentToOwnedHex(Hex hex) {
         for (Hex ownedHex : ownedHexes) {
             if (ownedHex.isAdjacent(hex)) {
                 return true;
@@ -108,7 +105,7 @@ public class Player {
     public void executeMinionStrategies(GameState gameState) {
         for (Minion minion : minions) {
             if (minion.isAlive()) {
-                minion.executeStrategy(gameState,this);
+                minion.executeStrategy(gameState, this);
             }
         }
     }

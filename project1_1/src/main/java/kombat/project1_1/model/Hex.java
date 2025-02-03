@@ -2,6 +2,8 @@ package kombat.project1_1.model;
 
 import lombok.Setter;
 
+import java.util.Objects;
+
 public class Hex {
     private final int x, y;
     @Setter
@@ -15,6 +17,20 @@ public class Hex {
         this.owner = null;
         this.minion = null;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Hex hex = (Hex) obj;
+        return x == hex.x && y == hex.y;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
+    }
+
 
     public boolean isOccupied() { return minion != null; }
     public int getX() { return x; }
