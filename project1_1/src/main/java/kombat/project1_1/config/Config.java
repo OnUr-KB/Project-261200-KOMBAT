@@ -6,6 +6,6 @@ public class Config {
     public static final int TURN_BUDGET = 900;
     public static final int MAX_BUDGET = 300000;
     public static final double INTEREST_PCT = 0.05;
-    public static final int MAX_TURNS = 10;
+    public static final int MAX_TURNS = 100;
     public static final int MAX_SPAWNS = 64;
 }

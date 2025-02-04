@@ -5,6 +5,8 @@ import kombat.project1_1.service.GameService;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 public abstract class Minion {
     // Getters
     @Getter
@@ -75,8 +77,18 @@ public abstract class Minion {
 
     // ทำตามกลยุทธ์ของมินเนียน
     public void executeStrategy(GameState gameState, Player owner) {
-        strategy.execute(this, gameState, owner);
+        List<String> commands = (List<String>) StrategyParser.parse(this.strategy.getStrategyCode()); // 🔥 เรียก getStrategyCode()
+        StrategyEvaluator evaluator = new StrategyEvaluator(this, gameState, owner);
+
+        // สร้าง Node จาก List<String> (คุณต้องตรวจสอบว่า Node รองรับหรือไม่)
+        Node node = new StatementListNode(commands);
+
+        // เรียกใช้ execute โดยส่ง Node
+        evaluator.execute(node);
     }
+
+
+
 
     public int getAttack() { // เพิ่ม getAttack สำหรับการเข้าถึง attackPower
         return attackPower;

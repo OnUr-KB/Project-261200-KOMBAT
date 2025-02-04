@@ -7,10 +7,10 @@ public class Moonum extends Minion {
     public Moonum(GameService gameService) {
         super(
                 "Moonum",              // ชื่อมินเนียน
-                15000,                 // ค่าตัว (Cost)
+                1500,                 // ค่าตัว (Cost)
                 500,                   // พลังโจมตี (Attack Power)
                 400,                   // การป้องกัน (Defense Power)
-                2500,                  // Max HP
+                7000,                  // Max HP
                 900,                   // ค่าการโจมตี (Attack Cost)
                 1300,                  // ค่าการป้องกัน (Defense Cost)
                 400,                   // ค่าการป้องกัน HP (Defense Protection)

@@ -102,11 +102,11 @@ public class Player {
         return minions;
     }
 
-    public void executeMinionStrategies(GameState gameState) {
-        for (Minion minion : minions) {
-            if (minion.isAlive()) {
-                minion.executeStrategy(gameState, this);
-            }
-        }
-    }
+//    public void executeMinionStrategies(GameState gameState) {
+//        for (Minion minion : minions) {
+//            if (minion.isAlive()) {
+//                minion.executeStrategy(gameState, this);
+//            }
+//        }
+//    }
 }
