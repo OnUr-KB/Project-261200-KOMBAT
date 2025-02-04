@@ -71,7 +71,7 @@ public class GameState {
                 scanner.nextLine(); // consume newline
                 Hex hex = hexGrid.getHex(x, y);
                 if (hex!= null && hex.getOwner() == player1 &&!hex.isOccupied()) {
-                    player1.buyMinion(new Cheesebear(), hex);
+                    player1.buyMinion(new Cheesebear(gameService), hex);
                     System.out.println("Cheesebear placed at (" + x + ", " + y + ")");
                 } else {
                     System.out.println("Invalid hex!");
@@ -83,7 +83,7 @@ public class GameState {
                 scanner.nextLine(); // consume newline
                 Hex hex = hexGrid.getHex(x, y);
                 if (hex!= null && hex.getOwner() == player1 &&!hex.isOccupied()) {
-                    player1.buyMinion(new Moonum(), hex);
+                    player1.buyMinion(new Moonum(gameService), hex);
                     System.out.println("Moonum placed at (" + x + ", " + y + ")");
                 } else {
                     System.out.println("Invalid hex!");
@@ -144,7 +144,7 @@ public class GameState {
                 scanner.nextLine(); // consume newline
                 Hex hex = hexGrid.getHex(x, y);
                 if (hex!= null && hex.getOwner() == player2 &&!hex.isOccupied()) {
-                    player2.buyMinion(new Cheesebear(), hex);
+                    player2.buyMinion(new Cheesebear(gameService), hex);
                     System.out.println("Cheesebear placed at (" + x + ", " + y + ")");
                 } else {
                     System.out.println("Invalid hex!");
@@ -156,7 +156,7 @@ public class GameState {
                 scanner.nextLine(); // consume newline
                 Hex hex = hexGrid.getHex(x, y);
                 if (hex!= null && hex.getOwner() == player2 &&!hex.isOccupied()) {
-                    player2.buyMinion(new Moonum(), hex);
+                    player2.buyMinion(new Moonum(gameService), hex);
                     System.out.println("Moonum placed at (" + x + ", " + y + ")");
                 } else {
                     System.out.println("Invalid hex!");

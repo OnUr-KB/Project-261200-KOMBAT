@@ -7,4 +7,3 @@ import kombat.project1_1.model.Player;
 public interface MinionStrategy {
     void execute(Minion minion, GameState gameState, Player owner);
 }
-

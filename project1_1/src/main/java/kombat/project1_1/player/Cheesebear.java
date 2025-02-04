@@ -1,8 +1,9 @@
 package kombat.project1_1.player;
 import kombat.project1_1.model.Minion;
+import kombat.project1_1.service.GameService;
 
 public class Cheesebear extends Minion {
-    public Cheesebear() {
+    public Cheesebear(GameService gameService) {
         super(
                 "Cheesebear",         // ชื่อมินเนียน
                 12000,                // ค่าตัว (Cost)
@@ -12,7 +13,9 @@ public class Cheesebear extends Minion {
                 1200,                 // ค่าการโจมตี (Attack Cost)
                 1500,                 // ค่าการป้องกัน (Defense Cost)
                 200,                  // ค่าการป้องกัน HP (Defense Protection)
-                new CheesebearMinionStrategy() // กลยุทธ์เฉพาะของ Cheesebear
+                gameService,
+                new CheesebearMinionStrategy(gameService) // กลยุทธ์เฉพาะของ Cheesebear
+
         );
     }
 }

@@ -1,6 +1,4 @@
 package kombat.project1_1.player;
-
-
 import kombat.project1_1.model.GameState;
 import kombat.project1_1.model.Hex;
 import kombat.project1_1.model.Minion;
@@ -15,7 +13,6 @@ public class MoonumMinionStrategy implements MinionStrategy {
 
     private final Random random = new Random();
     private GameService gameService; // เพิ่ม field gameService
-
     public MoonumMinionStrategy(GameService gameService) {
         this.gameService = gameService;
     }

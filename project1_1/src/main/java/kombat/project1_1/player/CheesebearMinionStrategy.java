@@ -12,7 +12,6 @@ import java.util.Objects;
 import java.util.Random;
 
 public class CheesebearMinionStrategy implements MinionStrategy {
-
     private final Random random = new Random();
     private GameService gameService; // เพิ่ม field gameService
     public CheesebearMinionStrategy(GameService gameService) {

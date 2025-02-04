@@ -4,7 +4,7 @@ import kombat.project1_1.model.Minion;
 import kombat.project1_1.service.GameService;
 
 public class Moonum extends Minion {
-    public Moonum() {
+    public Moonum(GameService gameService) {
         super(
                 "Moonum",              // ชื่อมินเนียน
                 15000,                 // ค่าตัว (Cost)
@@ -14,7 +14,9 @@ public class Moonum extends Minion {
                 900,                   // ค่าการโจมตี (Attack Cost)
                 1300,                  // ค่าการป้องกัน (Defense Cost)
                 400,                   // ค่าการป้องกัน HP (Defense Protection)
-                new MoonumMinionStrategy() // กลยุทธ์เฉพาะของ Moonum
+                gameService,
+                new MoonumMinionStrategy(gameService) // กลยุทธ์เฉพาะของ Moonum
+
         );
     }
 }
