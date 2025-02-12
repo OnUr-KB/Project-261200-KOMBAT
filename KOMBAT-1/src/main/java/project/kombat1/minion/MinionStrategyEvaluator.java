@@ -1,6 +1,9 @@
 package project.kombat1.minion;
+
 import project.kombat1.minion.MinionStrategyAST;
 import project.kombat1.model.GameState;
+import project.kombat1.model.HexGrid;
+import project.kombat1.model.Minion;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,23 +11,27 @@ import java.util.Random;
 
 public class MinionStrategyEvaluator {
 
-    private  Map<String, Long> variables;
+    private Map<String, Long> variables;
     private final GameState gameState;
+    private final Minion minion;  // ✅ เพิ่ม Minion
+    private final HexGrid hexGrid; // ✅ เพิ่ม HexGrid
     private final Random random;
 
+    // ✅ Constructor รองรับ Minion และ HexGrid
+    public MinionStrategyEvaluator(GameState gameState, Minion minion, HexGrid hexGrid) {
+        this.variables = new HashMap<>();
+        this.gameState = gameState;
+        this.minion = minion;
+        this.hexGrid = hexGrid;
+        this.random = new Random();
+    }
 
-    public Map<String, Long> getVariables() {  // เพิ่ม method นี้
+    public Map<String, Long> getVariables() {
         return variables;
     }
 
-    public void setVariables(Map<String, Long> variables) {  // เพิ่ม method นี้
+    public void setVariables(Map<String, Long> variables) {
         this.variables = variables;
-    }
-
-    public MinionStrategyEvaluator(GameState gameState) {
-        this.variables = new HashMap<>();
-        this.gameState = gameState;
-        this.random = new Random();
     }
 
     public void evaluate(MinionStrategyAST.Statement statement) {
@@ -60,7 +67,7 @@ public class MinionStrategyEvaluator {
     }
 
     public void evaluateBlockStatement(MinionStrategyAST.BlockStatement statement) {
-        for (MinionStrategyAST.Statement stmt: statement.statements) {
+        for (MinionStrategyAST.Statement stmt : statement.statements) {
             evaluate(stmt);
         }
     }
@@ -68,7 +75,7 @@ public class MinionStrategyEvaluator {
     public void evaluateAssignmentStatement(MinionStrategyAST.AssignmentStatement statement) {
         if (!statement.identifier.startsWith("$")) {
             variables.put(statement.identifier, evaluateExpression(statement.expression));
-            System.out.println("Variable " + statement.identifier + " = " + variables); // Print ค่าตัวแปร
+            System.out.println("Variable " + statement.identifier + " = " + variables);
         }
     }
 
@@ -77,11 +84,11 @@ public class MinionStrategyEvaluator {
             // Do nothing
         } else if (statement instanceof MinionStrategyAST.MoveCommand) {
             String direction = ((MinionStrategyAST.MoveCommand) statement).direction;
-            gameState.move(direction);
+            minion.getOwner().move(direction, hexGrid, gameState); // ✅ ใช้ `minion.getOwner()` ในการสั่ง move
         } else if (statement instanceof MinionStrategyAST.ShootCommand) {
             String direction = ((MinionStrategyAST.ShootCommand) statement).direction;
             long expenditure = evaluateExpression(((MinionStrategyAST.ShootCommand) statement).expenditure);
-            gameState.shoot(direction, expenditure);
+            minion.getOwner().shoot(direction, expenditure, hexGrid, gameState); // ✅ ใช้ `minion.getOwner()` ในการสั่ง shoot
         } else {
             throw new RuntimeException("Unexpected action command: " + statement);
         }
@@ -95,9 +102,9 @@ public class MinionStrategyEvaluator {
         } else if (expression instanceof MinionStrategyAST.IdentifierExpression) {
             String identifier = ((MinionStrategyAST.IdentifierExpression) expression).identifier;
             if (identifier.equals("budget")) {
-                return gameState.getBudget();
+                return minion.getOwner().getBudget(); // ✅ เปลี่ยนให้ใช้ `minion.getOwner()`
             } else if (identifier.equals("inputdefense")) {
-                return gameState.getInputDefense();
+                return minion.getDefense(); // ✅ เปลี่ยนเป็น `minion.getDefense()`
             } else if (identifier.equals("random")) {
                 return random.nextInt(1000);
             } else {
@@ -106,15 +113,15 @@ public class MinionStrategyEvaluator {
         } else if (expression instanceof MinionStrategyAST.InfoExpression) {
             MinionStrategyToken.Type type = ((MinionStrategyAST.InfoExpression) expression).type;
             if (type == MinionStrategyToken.Type.ALLY) {
-                return gameState.getAlly();
+                return minion.getOwner().getAlly(hexGrid, gameState); // ✅ ใช้ `getAlly()`
             } else if (type == MinionStrategyToken.Type.OPPONENT) {
-                return gameState.getOpponent();
+                return minion.getOwner().getOpponent(hexGrid, gameState); // ✅ ใช้ `getOpponent()`
             } else {
                 throw new RuntimeException("Unexpected info expression: " + expression);
             }
         } else if (expression instanceof MinionStrategyAST.NearbyExpression) {
             String direction = ((MinionStrategyAST.NearbyExpression) expression).direction;
-            return gameState.getNearby(direction);
+            return minion.getOwner().getNearby(direction, hexGrid, gameState); // ✅ ใช้ `getNearby()`
         } else {
             throw new RuntimeException("Unexpected expression: " + expression);
         }
@@ -140,6 +147,4 @@ public class MinionStrategyEvaluator {
                 throw new RuntimeException("Unexpected binary operator: " + expression.operator);
         }
     }
-
-
 }
