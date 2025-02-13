@@ -16,6 +16,13 @@ public class HexGrid {
             }
         }
     }
+    public int getNumRows() {
+        return grid.length;
+    }
+
+    public int getNumCols() {
+        return grid[0].length;
+    }
 
     public Hex getHex(int row, int col) {
         if (row < 0 || row >= 8 || col < 0 || col >= 8) {
@@ -85,8 +92,8 @@ public class HexGrid {
     public List<Hex> getAdjacentHexesOwnedByPlayer(int row, int col, Player player) {
         List<Hex> adjacentHexes = getAdjacentHexes(row, col);
         List<Hex> ownedHexes = new ArrayList<>();
-        for (Hex hex: adjacentHexes) {
-            if (hex!= null && hex.getMinion()!= null && hex.getMinion().getOwner() == player) {
+        for (Hex hex : adjacentHexes) {
+            if (hex != null && hex.getOwner() == player) { // ตรวจสอบว่า hex นั้น player เป็นเจ้าของหรือไม่
                 ownedHexes.add(hex);
             }
         }
