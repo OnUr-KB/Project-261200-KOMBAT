@@ -69,7 +69,7 @@ public class PandyMinionStrategy implements MinionStrategy {
                       if (budget - cost) then shoot up cost else {}
                     }
                     # will defend next turn
-                    x = inputdefense * 4
+                    x = owner.inputdefense() * 4 ;
                   } else {  # no visible opponent; move in a random direction
                     try = 0  # keep track of number of attempts
                     while (3 - try) {  # no more than 3 attempts

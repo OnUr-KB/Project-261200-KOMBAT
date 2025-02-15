@@ -8,4 +8,9 @@ public class BlockNode implements Node {
     public BlockNode(List<Node> statements) {
         this.statements = statements;
     }
+
+    @Override
+    public void execute() {
+
+    }
 }

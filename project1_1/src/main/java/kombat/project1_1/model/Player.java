@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Player {
     private String name;
@@ -102,11 +103,10 @@ public class Player {
         return minions;
     }
 
-//    public void executeMinionStrategies(GameState gameState) {
-//        for (Minion minion : minions) {
-//            if (minion.isAlive()) {
-//                minion.executeStrategy(gameState, this);
-//            }
-//        }
-//    }
+    public int getInputDefense(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter defense value: ");
+        return scanner.nextInt();
+    }
+
 }

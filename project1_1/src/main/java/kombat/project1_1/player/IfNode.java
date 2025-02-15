@@ -10,4 +10,9 @@ public class IfNode implements Node {
         this.thenStatement = thenStatement;
         this.elseStatement = elseStatement;
     }
+
+    @Override
+    public void execute() {
+
+    }
 }

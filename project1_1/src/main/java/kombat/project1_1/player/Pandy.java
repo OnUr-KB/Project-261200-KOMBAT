@@ -13,7 +13,6 @@ public class Pandy extends Minion {
                 5000,              // Max HP
                 1000,              // ค่าการโจมตี (Attack Cost)
                 1200,              // ค่าการป้องกัน (Defense Cost)
-                300,               // ค่าการป้องกัน HP (Defense Protection)
                 gameService,
                 new PandyMinionStrategy(gameService) // กลยุทธ์เฉพาะของ Pandy
         );

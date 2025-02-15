@@ -8,4 +8,9 @@ public class ShootNode implements Node {
         this.direction = direction;
         this.expression = expression;
     }
+
+    @Override
+    public void execute() {
+
+    }
 }

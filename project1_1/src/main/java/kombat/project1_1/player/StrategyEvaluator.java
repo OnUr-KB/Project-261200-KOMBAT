@@ -43,7 +43,7 @@ public class StrategyEvaluator {
     }
 
     private void executeStatementList(StatementListNode node) {
-        for (Node statement: node.statements) {
+        for (Node statement: node.getStatements()) {
             execute(statement);
         }
     }

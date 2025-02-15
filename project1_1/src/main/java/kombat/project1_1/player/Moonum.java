@@ -13,7 +13,6 @@ public class Moonum extends Minion {
                 7000,                  // Max HP
                 900,                   // ค่าการโจมตี (Attack Cost)
                 1300,                  // ค่าการป้องกัน (Defense Cost)
-                400,                   // ค่าการป้องกัน HP (Defense Protection)
                 gameService,
                 new MoonumMinionStrategy(gameService) // กลยุทธ์เฉพาะของ Moonum
 

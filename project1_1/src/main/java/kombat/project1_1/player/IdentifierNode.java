@@ -6,4 +6,9 @@ public class IdentifierNode implements Node {
     public IdentifierNode(String identifier) {
         this.identifier = identifier;
     }
+
+    @Override
+    public void execute() {
+
+    }
 }

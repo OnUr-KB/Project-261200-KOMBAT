@@ -21,7 +21,6 @@ public abstract class Minion {
     @Getter
     protected int attackCost;
     protected int defenseCost;
-    protected int defenseProtection;
     protected MinionStrategy strategy;
     @Getter
     @Setter
@@ -31,7 +30,7 @@ public abstract class Minion {
         return gameService;
     }
 
-    public Minion(String name, int cost, int attackPower, int defensePower, int maxHealth, int attackCost, int defenseCost, int defenseProtection, GameService gameService, MinionStrategy strategy) {
+    public Minion(String name, int cost, int attackPower, int defensePower, int maxHealth, int attackCost, int defenseCost, GameService gameService, MinionStrategy strategy) {
         this.name = name;
         this.cost = cost;
         this.attackPower = attackPower;
@@ -40,7 +39,6 @@ public abstract class Minion {
         this.currentHealth = maxHealth;
         this.attackCost = attackCost;
         this.defenseCost = defenseCost;
-        this.defenseProtection = defenseProtection;
         this.strategy = strategy;
         this.owner = null; // กำหนดค่าเริ่มต้น
 
@@ -63,7 +61,7 @@ public abstract class Minion {
     public void receiveDamage(int damage) {
         if (owner != null && owner.getCurrentMoney() >= defenseCost) {
             owner.setCurrentMoney(owner.getCurrentMoney() - defenseCost);
-            damage = Math.max(0, damage - defenseProtection);
+            damage = Math.max(0, damage - getDefensePower());
         }
         this.currentHealth -= damage;
         if (this.currentHealth < 0) this.currentHealth = 0; // ป้องกัน HP ติดลบ
@@ -77,9 +75,8 @@ public abstract class Minion {
 
     // ทำตามกลยุทธ์ของมินเนียน
     public void executeStrategy(GameState gameState, Player owner) {
-        List<String> commands = (List<String>) StrategyParser.parse(this.strategy.getStrategyCode()); // 🔥 เรียก getStrategyCode()
+        List<Node> commands = (List<Node>) StrategyParser.parse(this.strategy.getStrategyCode()); // 🔥 เรียก getStrategyCode()
         StrategyEvaluator evaluator = new StrategyEvaluator(this, gameState, owner);
-
         // สร้าง Node จาก List<String> (คุณต้องตรวจสอบว่า Node รองรับหรือไม่)
         Node node = new StatementListNode(commands);
 
@@ -110,9 +107,9 @@ public abstract class Minion {
         return defenseCost;
     }
 
-    public int getDefenseProtection() {
-        return defenseProtection;
-    }
+//    public int getDefenseProtection() {
+//        return defenseProtection;
+//    }
 
     public int getCostToMove() {
         if (this instanceof Pandy) {

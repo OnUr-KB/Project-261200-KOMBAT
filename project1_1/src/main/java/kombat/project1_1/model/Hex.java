@@ -44,4 +44,6 @@ public class Hex {
         int dy = Math.abs(this.y - other.getY());
         return (dx <= 1 && dy <= 1) && !(dx == 0 && dy == 0);
     }
+
+
 }

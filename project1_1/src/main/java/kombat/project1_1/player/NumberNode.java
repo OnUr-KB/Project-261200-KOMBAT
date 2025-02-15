@@ -6,4 +6,9 @@ public class NumberNode implements Node {
     public NumberNode(long value) {
         this.value = value;
     }
+
+    @Override
+    public void execute() {
+
+    }
 }

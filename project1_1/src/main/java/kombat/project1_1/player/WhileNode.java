@@ -8,4 +8,9 @@ public class WhileNode implements Node {
         this.condition = condition;
         this.statement = statement;
     }
+
+    @Override
+    public void execute() {
+
+    }
 }

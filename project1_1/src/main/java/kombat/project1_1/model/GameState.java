@@ -52,7 +52,7 @@ public class GameState {
             System.out.println("4. Buy hex (cost: 5000)");
             int choice = scanner.nextInt();
             scanner.nextLine(); // consume newline
-            if (choice == 1 && player1.getCurrentMoney() >= 10000) {
+            if (choice == 1 && player1.getCurrentMoney() >= 1000) {
                 System.out.println("Enter the x and y coordinates of the hex to place Pandy:");
                 int x = scanner.nextInt();
                 int y = scanner.nextInt();
@@ -64,7 +64,7 @@ public class GameState {
                 } else {
                     System.out.println("Invalid hex!");
                 }
-            } else if (choice == 2 && player1.getCurrentMoney() >= 12000) {
+            } else if (choice == 2 && player1.getCurrentMoney() >= 1200) {
                 System.out.println("Enter the x and y coordinates of the hex to place Cheesebear:");
                 int x = scanner.nextInt();
                 int y = scanner.nextInt();
@@ -76,7 +76,7 @@ public class GameState {
                 } else {
                     System.out.println("Invalid hex!");
                 }
-            } else if (choice == 3 && player1.getCurrentMoney() >= 15000) {
+            } else if (choice == 3 && player1.getCurrentMoney() >= 1500) {
                 System.out.println("Enter the x and y coordinates of the hex to place Moonum:");
                 int x = scanner.nextInt();
                 int y = scanner.nextInt();
@@ -88,7 +88,7 @@ public class GameState {
                 } else {
                     System.out.println("Invalid hex!");
                 }
-            }else if (choice == 4 && player1.getCurrentMoney() >= 5000) {
+            }else if (choice == 4 && player1.getCurrentMoney() >= 2000) {
                 System.out.println("Enter the x and y coordinates of the hex to buy:");
                 int x = scanner.nextInt();
                 int y = scanner.nextInt();
@@ -119,13 +119,13 @@ public class GameState {
         System.out.println("Player 2, do you want to buy anything? (y/n)");
         answer = scanner.nextLine();
         if (answer.equalsIgnoreCase("y")) {
-            System.out.println("1. Buy Pandy (cost: 10000)");
-            System.out.println("2. Buy Cheesebear (cost: 12000)");
-            System.out.println("3. Buy Moonum (cost: 15000)");
-            System.out.println("4. Buy hex (cost: 5000)");
+            System.out.println("1. Buy Pandy (cost: 1000)");
+            System.out.println("2. Buy Cheesebear (cost: 1200)");
+            System.out.println("3. Buy Moonum (cost: 1500)");
+            System.out.println("4. Buy hex (cost: 2000)");
             int choice = scanner.nextInt();
             scanner.nextLine(); // consume newline
-            if (choice == 1 && player2.getCurrentMoney() >= 10000) {
+            if (choice == 1 && player2.getCurrentMoney() >= 1000) {
                 System.out.println("Enter the x and y coordinates of the hex to place Pandy:");
                 int x = scanner.nextInt();
                 int y = scanner.nextInt();
@@ -137,7 +137,7 @@ public class GameState {
                 } else {
                     System.out.println("Invalid hex!");
                 }
-            } else if (choice == 2 && player2.getCurrentMoney() >= 12000) {
+            } else if (choice == 2 && player2.getCurrentMoney() >= 1200) {
                 System.out.println("Enter the x and y coordinates of the hex to place Cheesebear:");
                 int x = scanner.nextInt();
                 int y = scanner.nextInt();
@@ -149,7 +149,7 @@ public class GameState {
                 } else {
                     System.out.println("Invalid hex!");
                 }
-            } else if (choice == 3 && player2.getCurrentMoney() >= 15000) {
+            } else if (choice == 3 && player2.getCurrentMoney() >= 1500) {
                 System.out.println("Enter the x and y coordinates of the hex to place Moonum:");
                 int x = scanner.nextInt();
                 int y = scanner.nextInt();
@@ -161,7 +161,7 @@ public class GameState {
                 } else {
                     System.out.println("Invalid hex!");
                 }
-            } else if (choice == 4 && player2.getCurrentMoney() >= 5000) {
+            } else if (choice == 4 && player2.getCurrentMoney() >= 2000) {
                 System.out.println("Enter the x and y coordinates of the hex to buy:");
                 int x = scanner.nextInt();
                 int y = scanner.nextInt();

@@ -10,4 +10,9 @@ public class BinaryOperatorNode implements Node {
         this.left = left;
         this.right = right;
     }
+
+    @Override
+    public void execute() {
+
+    }
 }

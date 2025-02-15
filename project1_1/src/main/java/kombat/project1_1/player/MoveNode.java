@@ -6,4 +6,9 @@ public class MoveNode implements Node {
     public MoveNode(String direction) {
         this.direction = direction;
     }
+
+    @Override
+    public void execute() {
+
+    }
 }

@@ -62,4 +62,8 @@ public class HexGrid {
     public boolean myCoordinateHex(int x, int y, String playerName) {
         return checkHex(x, y).equals(playerName);
     }
+
+    public Hex[][] getGrid() {
+        return grid;
+    }
 }

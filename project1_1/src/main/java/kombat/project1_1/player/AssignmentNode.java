@@ -8,4 +8,9 @@ public class AssignmentNode implements Node {
         this.identifier = identifier;
         this.expression = expression;
     }
+
+    @Override
+    public void execute() {
+
+    }
 }
