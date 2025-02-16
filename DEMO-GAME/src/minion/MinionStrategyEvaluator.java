@@ -1,6 +1,6 @@
-package minion;
-import minion.MinionStrategyAST;
-import model.GameState;
+package main.minion;
+import main.model.GameState;
+import main.model.Minion;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +21,7 @@ public class MinionStrategyEvaluator {
         this.variables = variables;
     }
 
-    public MinionStrategyEvaluator(GameState gameState) {
+    public MinionStrategyEvaluator(GameState gameState, Minion minion) {
         this.variables = new HashMap<>();
         this.gameState = gameState;
         this.random = new Random();
