@@ -22,7 +22,7 @@ export default function Home() {
     >
       {/* ปุ่มต่างๆ */}
       <img
-        src="/image/buttom_play.png"
+        src="/image/button_play.png"
         alt="Play Button"
         style={{
           width: "20vw", // ใช้เป็น % ของ viewport width
@@ -39,7 +39,7 @@ export default function Home() {
       />
 
       <img
-        src="/image/buttom_how_to_play.png"
+        src="/image/button_how_to_play.png"
         alt="How to Play Button"
         style={{
           width: "20vw",

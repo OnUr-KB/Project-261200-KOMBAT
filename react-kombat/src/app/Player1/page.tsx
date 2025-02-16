@@ -172,7 +172,7 @@ export default function Page() {
         }}
         onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.8")}
         onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-        onClick={() => router.push("/playstate1")}
+        onClick={() => router.push("/select_mons")}
       />
       </div>
     </div>

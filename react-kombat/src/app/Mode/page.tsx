@@ -53,7 +53,7 @@ export default function Mode() {
 
 
   <img
-    src="/image/buttom_how_to_play.png"
+    src="/image/button_how_to_play.png"
     alt="How to Play Button"
     style={{
       width: "20vw",
