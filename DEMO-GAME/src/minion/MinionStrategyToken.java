@@ -1,6 +1,7 @@
 package main.minion;
 
 
+import java.util.Objects;
 
 public class MinionStrategyToken {
 
@@ -52,4 +53,18 @@ public class MinionStrategyToken {
                 ", lexeme='" + lexeme + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        MinionStrategyToken token = (MinionStrategyToken) obj;
+        return type == token.type && Objects.equals(lexeme, token.lexeme);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, lexeme);
+    }
+
 }

@@ -1,9 +1,6 @@
 package main.minion;
 
 
-import main.minion.MinionStrategyToken;
-import main.minion.MinionStrategyAST;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,10 +8,12 @@ public class MinionStrategyParser {
 
     private final List<MinionStrategyToken> tokens;
     private int position;
+    private int offset;
 
     public MinionStrategyParser(List<MinionStrategyToken> tokens) {
         this.tokens = tokens;
         this.position = 0;
+
     }
 
     public MinionStrategyAST.Statement parse() {
@@ -30,7 +29,7 @@ public class MinionStrategyParser {
         } else if (current.type == MinionStrategyToken.Type.LBRACE) {
             return parseBlockStatement();
         } else if (current.type == MinionStrategyToken.Type.IDENTIFIER) {
-            if (peek(1).type == MinionStrategyToken.Type.ASSIGN) {
+            if (peek().type == MinionStrategyToken.Type.ASSIGN) {
                 return parseAssignmentStatement();
             } else {
                 return parseActionCommand();
@@ -175,20 +174,23 @@ public class MinionStrategyParser {
     }
 
     private MinionStrategyToken peek() {
-        return tokens.get(position);
-    }
-
-    private MinionStrategyToken peek(int offset) {
+        if (position + offset >= tokens.size()) {
+            throw new RuntimeException("Token index out of bounds: " + (position + offset) + " (position: " + position + ", offset: " + offset + ")");
+        }
         return tokens.get(position + offset);
     }
 
     private MinionStrategyToken consume(MinionStrategyToken.Type type) {
+        if (position + offset >= tokens.size()) {
+            throw new RuntimeException("No more tokens to consume (position: " + position + ", offset: " + offset + ")");
+        }
+
         MinionStrategyToken current = peek();
         if (current.type == type) {
             position++;
             return current;
         } else {
-            throw new RuntimeException("Expected token of type " + type + ", but got " + current);
+            throw new RuntimeException("Expected token of type " + type + ", but got " + current + " (position: " + position + ")");
         }
     }
 }
