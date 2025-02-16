@@ -11,7 +11,7 @@ export default function Mode() {
         width: "100vw",
         height: "100vh",
         position: "relative",
-        backgroundImage: "url(/image/Desktop_select_mode.jpg)", // ไม่มี . นำหน้า
+        backgroundImage: "url(/image/Desktop_select_mode.png)", // ไม่มี . นำหน้า
         backgroundSize: "cover",
         backgroundPosition: "center",
       //  backgroundRepeat: "no-repeat",
@@ -75,8 +75,8 @@ export default function Mode() {
           position: "absolute",
           top: "5%", // ปรับให้อยู่ด้านบนสุด
           left: "10%", // ปรับให้อยู่ด้านซ้าย
-          width: "70px", // ปรับขนาดให้เล็กลง
-          height: "70px",
+          width: "50px", // ปรับขนาดให้เล็กลง
+          height: "50px",
           cursor: "pointer",
           transition: "opacity 0.3s",
           zIndex: 10, // ทำให้แสดงอยู่ด้านบน

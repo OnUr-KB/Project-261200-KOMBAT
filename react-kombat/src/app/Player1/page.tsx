@@ -2,7 +2,7 @@
 import React, { useState, useEffect} from "react";
 import { Container, Flex, NumberInput } from "@mantine/core";
 import { useRouter } from "next/navigation";
-
+import Navbar from "../components/navbar1"; 
 
 export default function Page() {
   const [data, setData] = useState({ money: 0, hex: 0, minions: 0 });
@@ -21,10 +21,6 @@ export default function Page() {
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
-  const demoProps = {
-    bg: "#6D2323",
-    h: 60,
-  };
 
   return (
     <div style={{ position: "relative" }}>
@@ -45,65 +41,7 @@ export default function Page() {
       />
 
       {/* Navbar */}
-      <Container
-        size="xl"
-        {...demoProps}
-        style={{
-          position: "fixed",
-          zIndex: 1,
-          maxWidth: "100%",
-          display: "flex",
-          width: "1036px",
-          height: "70px",
-         // justifyContent: "center",
-          alignItems: "flex-start",
-          gap: "41px",
-          flexShrink: 0,
-        }}
-      >
-        <Flex align="center" justify="flex-start" gap="md">
-          <div style={{ position: "relative" }}>
-            <div
-              style={{
-                width: 75,
-                height: 75,
-                borderRadius: "50%",
-                border: "3px solid #6D2323",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                backgroundColor: "white",
-              }}
-            >
-              <img
-                src="/image/butter_bear.jpg"
-                alt="Profile"
-                style={{ width: 65, height: 65, borderRadius: "50%", objectFit: "cover" }}
-              />
-            </div>
-            <span
-              style={{
-                position: "absolute",
-                bottom: 5,
-                right: 5,
-                width: 14,
-                height: 14,
-                backgroundColor: "#4CAF50",
-                borderRadius: "50%",
-                border: "2px solid white",
-              }}
-            />
-          </div>
-          <span style={{ color: "white", fontSize: "18px", fontWeight: "bold" }}>
-            Player 1
-          </span>
-          <Flex gap="lg" style={{ color: "white", fontSize: "16px", fontWeight: "bold" }}>
-            <span>💰 {data.money}</span>
-            <span>🛡️ {data.minions}</span>
-            <span>⬢ {data.hex}</span>
-          </Flex>
-        </Flex>
-      </Container>
+      <Navbar />
 
       {/* Input กลางหน้าจอ */}
       <div
@@ -126,8 +64,8 @@ export default function Page() {
           position: "absolute",
           top: "85%", // ปรับให้อยู่ด้านบนสุด
           left: "5%", // ปรับให้อยู่ด้านซ้าย
-          width: "70px", // ปรับขนาดให้เล็กลง
-          height: "70px",
+          width: "50px", // ปรับขนาดให้เล็กลง
+          height: "50px",
           cursor: "pointer",
           transition: "opacity 0.3s",
           zIndex: 10, // ทำให้แสดงอยู่ด้านบน
@@ -143,9 +81,9 @@ export default function Page() {
         style={{
           position: "absolute",
           top: "85%", // ปรับให้อยู่ด้านบนสุด
-          left: "14%", // ปรับให้อยู่ด้านซ้าย
-          width: "70px", // ปรับขนาดให้เล็กลง
-          height: "70px",
+          left: "12%", // ปรับให้อยู่ด้านซ้าย
+          width: "50px", // ปรับขนาดให้เล็กลง
+          height: "50px",
           cursor: "pointer",
           transition: "opacity 0.3s",
           zIndex: 10, // ทำให้แสดงอยู่ด้านบน
@@ -172,7 +110,7 @@ export default function Page() {
         }}
         onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.8")}
         onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-        onClick={() => router.push("/select_mons")}
+        onClick={() => router.push("/create_strategy")}
       />
       </div>
     </div>
