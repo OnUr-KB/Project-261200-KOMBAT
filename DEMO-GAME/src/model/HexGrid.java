@@ -18,20 +18,40 @@ public class HexGrid {
 
     public Hex getHex(int row, int col) {
         // ตรวจสอบว่า row และ column อยู่ในขอบเขตของ grid หรือไม่
-        if (row < 0 || row >= grid.length || col < 0 || col >= grid[0].length) { // ตรวจสอบ column index ให้ถูกต้อง
+        if (row < 0 || row >= grid.length || col < 0 || col >= grid[0].length) {
             return null; // คืนค่า null ถ้า row หรือ column อยู่นอกขอบเขต
         }
         return grid[row][col]; // คืนค่า hex ที่ตำแหน่ง row และ column ที่ระบุ
     }
 
     // เมธอดสำหรับหา hex ที่อยู่ติดกัน
-    public List<Hex> getAdjacentHexes(int row, int col) { // รับ row และ col เป็น parameters
+    public List<Hex> getAdjacentHexes(int row, int col) {
         List<Hex> adjacentHexes = new ArrayList<>();
 
-        // คำนวณ offset ของ row และ column สำหรับแต่ละ hex ที่อยู่ติดกัน
-        int[][] offsets = { // ใช้ 2D array สำหรับ offsets
-                {-1, 0}, {-1, 1}, {0, 1}, {1, 0}, {1, -1}, {0, -1}
-        };
+        // คำนวณ offset ของ row และ column สำหรับแต่ละ hex ที่อยู่ติดกัน รอบๆ hex ที่กำหนด
+        int[][] offsets;
+
+        // Special case: Hexagonal grid offsets depend on whether the row is even or odd
+        if(row % 2 == 0){ // Even row
+            offsets = new int[][]{
+                    {-1, 0},  // บน
+                    {-1, 1},  // บนขวา
+                    {0, 1},   // ขวา
+                    {1, 0},   // ล่าง
+                    {1, -1},  // ล่างซ้าย
+                    {0, -1}   // ซ้าย
+            };
+        } else { // Odd row
+            offsets = new int[][]{
+                    {-1, -1},  // บนซ้าย
+                    {-1, 0},  // บน
+                    {0, 1},   // ขวา
+                    {1, 1},   // ล่างขวา
+                    {1, 0},  // ล่าง
+                    {0, -1}   // ซ้าย
+            };
+        }
+
 
         // วนลูป offset และเพิ่ม hex ที่อยู่ติดกัน vào list
         for (int[] offset : offsets) {
@@ -45,29 +65,29 @@ public class HexGrid {
 
         return adjacentHexes; // คืนค่า list ของ hex ที่อยู่ติดกัน
     }
+
+
     public List<Hex> getAdjacentHexesOwnedByPlayer(int row, int col, Player player) {
-        List<Hex> adjacentHexes = getAdjacentHexes(row, col); // หา Hex ข้างเคียงทั้งหมด
+        List<Hex> adjacentHexes = getAdjacentHexes(row, col);
         List<Hex> ownedHexes = new ArrayList<>();
         for (Hex hex : adjacentHexes) {
-            if (hex.getOwner() == player) { // ตรวจสอบว่าเป็นของ player หรือไม่
+            if (hex.getOwner() == player) {
                 ownedHexes.add(hex);
             }
         }
-        return ownedHexes; // คืนค่า Hex ข้างเคียงที่เป็นของ player
+        return ownedHexes;
     }
 
     public boolean isHexEmpty(int row, int col) {
         Hex hex = getHex(row, col);
-        return hex != null && hex.getMinion() == null && hex.getOwner() == null; // Hex ว่าง: ไม่มี Minion และไม่มีเจ้าของ
+        return hex != null && hex.getMinion() == null && hex.getOwner() == null;
     }
 
     public int getNumRows(){
-        return grid.length; // คืนค่าจำนวนแถว
+        return grid.length;
     }
 
     public int getNumCols(){
-        return grid[0].length; // คืนค่าจำนวนคอลัมน์
+        return grid[0].length;
     }
-
-
 }

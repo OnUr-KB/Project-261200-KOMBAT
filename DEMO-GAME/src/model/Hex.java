@@ -1,4 +1,3 @@
-// Hex.java (model package)
 package main.model;
 
 public class Hex {

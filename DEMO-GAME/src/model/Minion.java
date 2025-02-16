@@ -1,7 +1,6 @@
-// Minion.java (model package)
 package main.model;
 
-import minion.MinionStrategyAST;
+import main.minion.MinionStrategyAST;
 
 public class Minion {
     private int hp; // พลังชีวิตของ Minion

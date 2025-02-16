@@ -1,18 +1,17 @@
-// Player.java (model package)
 package main.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import minion.MinionStrategyAST; // Import MinionStrategyAST
-import minion.MinionStrategyParser;  // Import the parser
-import minion.MinionStrategyLexer;   // Import the lexer
+import main.minion.MinionStrategyAST; // Import MinionStrategyAST
+import main.minion.MinionStrategyParser;  // Import the parser
+import main.minion.MinionStrategyLexer;   // Import the lexer
 import java.util.Map;
 import java.util.HashMap;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
-import config.Config; // Import Config
+import main.config.Config; // Import Config
 
 
 
@@ -81,7 +80,7 @@ public class Player {
 
     // ซื้อ Minion
     public boolean buyMinion(Minion.MinionType minionType, int row, int col, HexGrid hexGrid) {
-        if (budget >= minionType.getCost() && minions.size() < Config.MAX_SPAWNS) { //ใช้ Config.MAX_SPAWNS
+        if (budget >= minionType.getCost() && minions.size() < Config.MAX_SPAWNS) { //ใช้ Config.MAX_SPAWNS) { //ใช้ Config.MAX_SPAWNS
             Hex hex = hexGrid.getHex(row, col);
 
             // ตรวจสอบว่า hex เป็นของผู้เล่นและว่าง
@@ -119,9 +118,9 @@ public class Player {
     private MinionStrategyAST.Statement loadStrategy(String strategyPath) {
         try {
             // อ่านไฟล์ strategy
-            String strategyCode = new String(Files.readAllBytes(Paths.get("src/" + strategyPath.replace(".", "/") + ".txt")));
+            String strategyCode = new String(Files.readAllBytes(Paths.get("src/main/minion/" + strategyPath.replace(".", "/") + ".txt")));
             MinionStrategyLexer lexer = new MinionStrategyLexer(strategyCode);
-            List<minion.MinionStrategyToken> tokens = lexer.lex();
+            List<main.minion.MinionStrategyToken> tokens = lexer.lex();
             MinionStrategyParser parser = new MinionStrategyParser(tokens);
             return parser.parse(); // คืนค่า AST
         } catch (IOException e) {
@@ -133,15 +132,15 @@ public class Player {
     public void executeMinionStrategies(HexGrid hexGrid, GameState gameState) {
         for (Minion minion : this.getMinions()) {
             if (minion.getHex() != null) { // ตรวจสอบว่า Minion อยู่บนกระดานหรือไม่
-                minion.MinionStrategyEvaluator evaluator = new minion.MinionStrategyEvaluator(gameState, minion); // Pass Minion object
-                // ส่งผ่าน variables จาก GameState ไปยัง MinionStrategyEvaluator
-                evaluator.setVariables(gameState.getVariables());
+                main.minion.MinionStrategyEvaluator evaluator = new main.minion.MinionStrategyEvaluator(gameState, minion); // Pass Minion object and GameState
+                // ส่งผ่าน variables จาก GameState ไปยัง MinionStrategyEvaluator ไม่ต้องทำเเล้วเพราะใช้ shared map
+                // evaluator.setVariables(gameState.getVariables());
 
                 evaluator.evaluate(minion.getStrategy());
-
             }
         }
     }
+
 
 
     public void promptPlayerTurn(HexGrid hexGrid, GameState gameState) {
