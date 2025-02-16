@@ -64,8 +64,8 @@ export default function Page() {
           position: "absolute",
           top: "85%", // ปรับให้อยู่ด้านบนสุด
           left: "5%", // ปรับให้อยู่ด้านซ้าย
-          width: "70px", // ปรับขนาดให้เล็กลง
-          height: "70px",
+          width: "50px", // ปรับขนาดให้เล็กลง
+          height: "50px",
           cursor: "pointer",
           transition: "opacity 0.3s",
           zIndex: 10, // ทำให้แสดงอยู่ด้านบน
@@ -81,9 +81,9 @@ export default function Page() {
         style={{
           position: "absolute",
           top: "85%", // ปรับให้อยู่ด้านบนสุด
-          left: "14%", // ปรับให้อยู่ด้านซ้าย
-          width: "70px", // ปรับขนาดให้เล็กลง
-          height: "70px",
+          left: "12%", // ปรับให้อยู่ด้านซ้าย
+          width: "50px", // ปรับขนาดให้เล็กลง
+          height: "50px",
           cursor: "pointer",
           transition: "opacity 0.3s",
           zIndex: 10, // ทำให้แสดงอยู่ด้านบน

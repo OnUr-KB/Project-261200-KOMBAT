@@ -2,7 +2,7 @@
 "use client"
 import React from "react";
 import { useRouter } from "next/navigation";
-import { Container, TextInput} from "@mantine/core";
+import { Container, TextInput,Input,Textarea} from "@mantine/core";
 import Navbar from "../components/navbar1"; // สำหรับไฟล์ที่อยู่ในโฟลเดอร์เดียวกันกับหน้า
  
 
@@ -19,7 +19,7 @@ const strategypage = () => {
           position: "fixed",
           top: 0,
           left: 0,
-          backgroundImage: "url('/image/Desktop_strategy1.jpg')",
+          backgroundImage: "url('/image/Desktop_strategy01.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -37,7 +37,9 @@ const strategypage = () => {
           justifyContent: "center",
           alignItems: "center",
           height: "100vh",
+          left: "4%",
           margin: 0,
+          position :"fixed"
         }}
       >
         
@@ -48,10 +50,10 @@ const strategypage = () => {
           alt="Return Button"
           style={{
             position: "absolute",
-            top: "85%",
-            left: "5%",
-            width: "60px",
-            height: "60px",
+            top: "87%",
+            
+            width: "50px",
+            height: "50px",
             cursor: "pointer",
             transition: "opacity 0.3s",
             zIndex: 10,
@@ -61,46 +63,74 @@ const strategypage = () => {
           onClick={() => router.push("/Mode")}
         />
 
-
-
-        <img
-          src="/image/button_Next_.png"
-          alt="Play Button"
-          style={{
-            width: "20vw",
-            maxWidth: "300px",
-            position: "absolute",
-            top: "85%",
-            left: "75%",
-            height: "auto",
-            cursor: "pointer",
-            transition: "0.3s",
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.8")}
-          onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-          onClick={() => router.push("/playstate1")}
-        />
       </div>
       <div
+  style={{
+    display: "flex",
+    flexDirection: "column", // จัดเรียงทุกอย่างในแนวตั้ง
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100vh",
+    paddingTop:"10%", // ปรับระยะห่างใต้ Navbar
+   
+  }}
+>
+  {/* กล่อง Input 1 */}
+  <Container>
+    <TextInput mt="md" radius="xl" placeholder="name:" />
+  </Container>
+
+  {/* กล่อง Input 2 */}
+  <Container style={{ marginTop: "20px" }}> 
+    <Input size="sm" radius="xl" placeholder="defense:" />
+  </Container>
+ {/* กล่อง strategy */}
+<Container
+  style={{
+    marginTop: "30px",
+    width: "60vw", // ปรับให้กว้างขึ้น
+    height: "80vh", // ปรับให้สูงขึ้น
+  }}
+>
+  <Textarea
+    resize="vertical"
+    label="Strategy"
+    placeholder="Describe your strategy..."
+    style={{
+      width: "100%", // ให้เต็ม Container
+      minHeight: "55vh", // ปรับให้สูงขึ้น
+      fontSize: "18px", // ปรับขนาดตัวอักษรให้ใหญ่ขึ้น
+      padding: "10px", // เพิ่มระยะห่างข้างใน
+    }}
+  />
+</Container>
+
+  
+</div>
+{/* ปุ่ม next */}
+<img
+        src="/image/button_Finish_.png"
+        alt="Finish Button"
         style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-          margin: 0,
+          width: "20vw", // ใช้เป็น % ของ viewport width
+          maxWidth: "300px", // จำกัดขนาดสูงสุด
+          position: "absolute",
+          top: "87%",
+          left: "42%",
+          height: "auto",
+          cursor: "pointer",
+          transition: "0.3s",
+
+         // marginTop: "200px",
+          //marginBottom: "2px", // ระยะห่างระหว่างปุ่ม
         }}
-      >
-          <Container>
-          <TextInput
-        mt="md"
-        label="With error message"
-        placeholder="With error message"
-        error="Invalid name"
+        onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.8")}
+        onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+        onClick={() => router.push("/create_strategy2")}
       />
-          </Container>
-     
+
       </div>
-    </div>
+   
   );
 };
 

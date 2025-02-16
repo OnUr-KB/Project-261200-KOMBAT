@@ -67,15 +67,17 @@ export default function selectmons() {
 </div>
 <Flex
       direction={{ base: 'column', sm: 'row' }}
-      gap={{ base: 'sm', sm: 'lg' }}
-      justify={{ sm: 'center' }}
+  
+      gap= "10%"
+     
+      justify="center"
       style={{
         position: "fixed",
-        bottom: "20%", // ปรับให้ลงมาต่ำกว่าขอบจอเล็กน้อย
+        bottom: "23%", // ปรับให้ลงมาต่ำกว่าขอบจอเล็กน้อย
         left: "50%",
         transform: "translateX(-50%)", // ทำให้ปุ่มอยู่กึ่งกลางแนวนอน
         width: "100%", // ทำให้ปุ่มกระจายเท่ากัน
-        //margin:"20%"
+        
         
       }}
     >
@@ -125,6 +127,26 @@ export default function selectmons() {
           onClick={() => router.push("/playstate1")}
         />
     </Flex>
+    {/* ปุ่ม next */}
+  <img
+        src="/image/button_Next_.png"
+        alt="Play Button"
+        style={{
+          width: "20vw", // ใช้เป็น % ของ viewport width
+          maxWidth: "300px", // จำกัดขนาดสูงสุด
+          position: "absolute",
+          top: "85%",
+          left: "75%",
+          height: "auto",
+          cursor: "pointer",
+          transition: "0.3s",
+         // marginTop: "200px",
+          //marginBottom: "2px", // ระยะห่างระหว่างปุ่ม
+        }}
+        onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.8")}
+        onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+        onClick={() => router.push("/playgame_p1")}
+      />
     </div>
   )
 }
