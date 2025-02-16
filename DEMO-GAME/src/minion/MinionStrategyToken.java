@@ -1,4 +1,4 @@
-package minion;
+package main.minion;
 
 
 

@@ -1,4 +1,4 @@
-package config;
+package main.config;
 
 public class Config {
 

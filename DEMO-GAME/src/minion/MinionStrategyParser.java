@@ -1,8 +1,8 @@
-package minion;
+package main.minion;
 
 
-import minion.MinionStrategyToken;
-import minion.MinionStrategyAST;
+import main.minion.MinionStrategyToken;
+import main.minion.MinionStrategyAST;
 
 import java.util.ArrayList;
 import java.util.List;
