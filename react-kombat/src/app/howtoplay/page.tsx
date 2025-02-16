@@ -9,33 +9,45 @@ export default function Howtoplay() {
   return (
     <div
       style={{
-        width: "100vw", // เต็มจอแนวนอน
-        height: "100vh", // เต็มจอแนวตั้ง
+        width: "100vw", 
+        height: "100vh",
+        display: "flex",
         position: "relative",
-        backgroundImage: "url('/image/Desktop_how_to_play.jpg')", // ตรวจสอบ path
-        backgroundSize: "contain",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundImage: "url('/image/Desktop_how_to_play.jpg')",
+        backgroundSize: "contain", 
         backgroundPosition: "center",
-          backgroundRepeat: "no-repeat"
+        backgroundRepeat: "no-repeat", 
       }}
     >
-      {/* ปุ่ม Return */}
-      <img
-        src="/image/return_button.png"
-        alt="Return Button"
+         {/* ปุ่ม Return */}
+         <div
         style={{
           position: "absolute",
-          top: "5%", // ปรับให้อยู่ด้านบนสุด
-          left: "18%", // ปรับให้อยู่ด้านซ้าย
-          width: "50px", // ปรับขนาดให้เล็กลง
-          height: "50px",
-          cursor: "pointer",
-          transition: "opacity 0.3s",
-          zIndex: 10, // ทำให้แสดงอยู่ด้านบน
+          top: "7%", 
+          left: "15%", 
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          transform: "translate(-50%, -50%)", 
         }}
-        onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.8")}
-        onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-        onClick={() => router.push("/Home")}
-      />
+      >
+        <img
+          src="/image/return_button.png"
+          alt="Return Button"
+          style={{
+            width: "4vw", 
+            maxWidth: "70px",
+            height: "auto",
+            cursor: "pointer",
+            transition: "opacity 0.3s",
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.8")}
+          onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+          onClick={() => router.push("/")}
+        />
+      </div>
     </div>
   );
 }
